@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">and1hw4</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="collection_of_songs">collection of songs</string>
+    <string name="molchat_doma">Molchat doma</string>
+</resources>
