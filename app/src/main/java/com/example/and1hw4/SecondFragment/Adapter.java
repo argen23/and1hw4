@@ -8,15 +8,21 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+
 import com.example.and1hw4.R;
 import com.example.and1hw4.Models.User;
 
 import java.util.ArrayList;
 
 public class Adapter extends RecyclerView.Adapter<Adapter.MainHolder> {
-    private ArrayList<User> list = new ArrayList<>();
-
+    private ArrayList<User> list = new ArrayList<>();;
     private TextView number , name , musicName , musicDuration;
+    private OnClickListener onClickListener;
+
+    public void setOnClickListener(OnClickListener onClickListener) {
+        this.onClickListener = onClickListener;
+    }
+
     @NonNull
     @Override
     public MainHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -29,6 +35,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.MainHolder> {
         notifyDataSetChanged();
     }
 
+
     @Override
     public void onBindViewHolder(@NonNull MainHolder holder, int position) {
         holder.onBind(list.get(position));
@@ -38,7 +45,9 @@ public class Adapter extends RecyclerView.Adapter<Adapter.MainHolder> {
     public int getItemCount() {
         return list.size();
     }
-
+    public interface OnClickListener{
+        void onClick();
+    }
     public  class MainHolder extends RecyclerView.ViewHolder {
         public MainHolder(@NonNull View itemView) {
             super(itemView);
@@ -47,12 +56,19 @@ public class Adapter extends RecyclerView.Adapter<Adapter.MainHolder> {
             musicName = itemView.findViewById(R.id.tv_music_name);
             musicDuration = itemView.findViewById(R.id.tv_music_duration);
         }
-
         public void onBind(User list) {
             number.setText(list.getNumber());
             name.setText(list.getName());
             musicName.setText(list.getMusicName());
             musicDuration.setText(list.getMusicDuration());
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    onClickListener.onClick();
+                }
+            });
         }
+
     }
+
 }

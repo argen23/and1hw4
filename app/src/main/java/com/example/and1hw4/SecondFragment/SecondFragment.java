@@ -1,16 +1,23 @@
 package com.example.and1hw4.SecondFragment;
 
+import android.content.Intent;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.provider.MediaStore;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.and1hw4.MainActivity;
+import com.example.and1hw4.MainActivity2;
 import com.example.and1hw4.Models.User;
 import com.example.and1hw4.R;
 
@@ -39,7 +46,15 @@ public class SecondFragment extends Fragment {
         rv  = view.findViewById(R.id.rv);
         adapter = new Adapter();
         rv.setAdapter(adapter);
+
         adapter.setList(createList());
+        adapter.setOnClickListener(new Adapter.OnClickListener() {
+            @Override
+            public void onClick() {
+                Intent in = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                startActivity(in);
+            }
+        });
     }
 
     private ArrayList<User> createList() {
@@ -51,7 +66,7 @@ public class SecondFragment extends Fragment {
         list.add(new User("5","Молчат дома","На дне","4:07"));
         list.add(new User("6","Молчат дома","Судно (Борис Рыжий)","2:21"));
         list.add(new User("7","Молчат дома","Тоска","3:09"));
-        
+
         return list;
     }
 }
